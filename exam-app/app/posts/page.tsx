@@ -1,14 +1,13 @@
 "use client";
 
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 export async function fetchQuery() {
   const res = await fetch("/api/posts");
   return res.json();
 }
 
-const Post: {
+type Post = {
   id: string;
   title: string;
   content: string;
