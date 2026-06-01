@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { fetchQuery } from "@/app/posts/page";
 
 async function createPost(title: string, content: string) {
   const res = await fetch("api/posts", {
@@ -21,7 +20,7 @@ export default function FormPage() {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: createPost,
+    mutationFn: () => createPost(title, content),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["posts"] });
       setContent("");
